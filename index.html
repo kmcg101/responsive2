@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- cap-initialize:start -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./jquery-3.2.1.min.js"></script>
+    <script src="./capHtml5.js"></script>
+    <script src="./initialize.js"></script>
+    <!-- <script src="../../_commonAssets/js/test_js.js"></script> -->
+    <script>
+      $(function () {
+        cap.injectArguments();
+      });
+    </script>
+
+    <!-- cap-initialize:end -->
+
+    <link cap-id="Avenir_Heavy_css" cap-target="href" cap-source="asset" cap-edit="common" cap-name="Avenir_Heavy" cap-category="css" rel="stylesheet" type="text/css" />
+    <link cap-id="Avenir_Roman_css" cap-target="href" cap-source="asset" cap-edit="common" cap-name="Avenir_Roman" cap-category="css" rel="stylesheet" type="text/css" />
+    <link cap-id="cssReset" cap-target="href" cap-source="asset" cap-category="css" cap-name="reset" cap-edit="common" cap-order="1" rel="stylesheet" type="text/css" />
+    <link cap-id="css" cap-target="href" cap-source="asset" cap-edit="upload" cap-order="2" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div id="fullScreen" class="fullScreen elevator">
+      <div class="standardAd">
+        <div class="videoHolder">
+          <video id="myVideo" autoplay>
+            <source src="./standardad.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="interactiveElements">
+          <div id="format" class="format"></div>
+
+          <div class="labelTextContainer">
+            <div class="labelText">copy size:</div>
+            <div id="copyCurrentValue" class="valueText"></div>
+          </div>
+        </div>
+      </div>
+      <div class="playerDiv">
+        <div id="ourCanvas" class="ourCanvas">
+          <div id="workingArea" class="workingArea positionRelative">
+            <div class="headlineContainer flexContainerRow flexAlignBaseline">
+              <img onerror='this.style.display = "none"' class="inlineImageSizeEqualsText marginRightText" src="./breaking.svg" />
+
+              <div id="headline" class="headline lh-500 txt-clr-primary-900 fs-700 ff-bold marginRightText">Many expect 2020</div>
+
+              <img onerror='this.style.display = "none"' class="inlineImageSizeEqualsText marginRightText" src="./breaking.svg" />
+
+              <div id="subHeadline" class="subHeadlineText ff-primary fs-300">Sub Headline</div>
+            </div>
+
+            <div class="underline"></div>
+
+            <div id="copy" class="copy lh-500 txt-clr-primary-900 fs-500 ff-primary">Close to 4 in 10 Americans expect a better year ahead for them personally, while another half expect things to stay about the same.</div>
+
+            <div class="footerContainer providerLogoSize positionAbsoluteBottomLeft flexContainerRow flexCenterVertical">
+              <!-- <div class="footerImageContainer">
+                <img src="./2020_Twitter_Logo_White.svg" alt="alt" />
+              </div> -->
+              <div id="footer" class="footer lh-500 txt-clr-primary-300 fs-300 ff-primary">Footer</div>
+            </div>
+
+            <img class="positionAbsoluteBottomRight providerLogoSize" src="../../_commonAssets/images/partner.svg" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.designMode = "on";
+
+      function clearClassList() {
+        const fullScreen = document.getElementById("fullScreen");
+        const formatText = document.getElementById("format");
+        formatText.innerHTML = "";
+        fullScreen.classList.remove("portrait");
+        fullScreen.classList.remove("landscape");
+        fullScreen.classList.remove("elevator");
+      }
+      function determineAspectRatioClass() {
+        // get the font size of the copy class
+        const copyElement = document.getElementById("copy");
+        const copyStyle = window.getComputedStyle(copyElement);
+
+        // get the width and height of the working area
+        const currentStage = document.getElementById("workingArea");
+        const stageWidth = currentStage.offsetWidth;
+        const stageHeight = currentStage.offsetHeight;
+        const stageArea = stageWidth * stageHeight;
+
+        const cssRoot = document.querySelector(":root");
+
+        // get width and height of class fullScreen
+        // these measurements determine aspect ratio e, l, or p
+        let screenContainer = document.getElementById("fullScreen");
+        currentWidth = screenContainer.offsetWidth;
+        currentHeight = screenContainer.offsetHeight;
+
+        const aspectRatio = currentWidth / currentHeight;
+
+        clearClassList();
+        const formatText = document.getElementById("format");
+
+        /*
+        // for hs get 22% of height of the area
+        const twentyPercentHeight = stageHeight * 0.22;
+        const pxValue = twentyPercentHeight.toString() + "px";
+        cssRoot.style.setProperty("--providerLogoHeight", pxValue);
+        console.log("stage height = ", stageHeight);
+        console.log(pxValue);
+        //35 for elevator
+        // 35 px height for 158 = 22%
+
+        */
+
+        const copyFontSize = copyStyle.getPropertyValue("font-size");
+        document.getElementById("copyCurrentValue").innerHTML = copyFontSize;
+
+        // set to height of ad area to e, l, or p
+        if (aspectRatio < 1) {
+          screenContainer.classList.add("portrait");
+          formatText.innerHTML = "portrait";
+          cssRoot.style.setProperty("--copyFontSize", "2.5vmax");
+        } else if (aspectRatio < 1.422 && aspectRatio >= 1) {
+          screenContainer.classList.add("elevator");
+          formatText.innerHTML = "elevator";
+          cssRoot.style.setProperty("--copyFontSize", "3.44vmax");
+        } else {
+          screenContainer.classList.add("landscape");
+          formatText.innerHTML = "landscape";
+          cssRoot.style.setProperty("--copyFontSize", "3.44vmax");
+        }
+      }
+
+      $(document).ready(function () {
+        console.log("ready");
+        determineAspectRatioClass();
+
+        addEventListener("resize", (event) => {
+          //populateText();
+          determineAspectRatioClass();
+        });
+      });
+    </script>
+  </body>
+</html>
