@@ -264,8 +264,8 @@ html {
 }
 
 .labelTextContainer {
-  display: flex;
-  font-size: 30px;
+  /* display: flex; */
+  font-size: 24px;
 }
 
 /* this centers it based on the width of the div */

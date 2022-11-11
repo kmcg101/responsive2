@@ -25,17 +25,21 @@
   <body>
     <div id="fullScreen" class="fullScreen elevator">
       <div class="standardAd">
-        <div class="videoHolder">
+        <!-- <div class="videoHolder">
           <video id="myVideo" autoplay>
             <source src="./standardad.mp4" type="video/mp4" />
           </video>
-        </div>
+        </div> -->
         <div class="interactiveElements">
           <div id="format" class="format"></div>
 
           <div class="labelTextContainer">
             <div class="labelText">copy size:</div>
             <div id="copyCurrentValue" class="valueText"></div>
+            <div class="labelText">Copy font size breakpoint values:</div>
+            <div class="valueText">Elevator (640x480): 22px</div>
+            <div class="valueText">Landscape (1024x720): 31px</div>
+            <div class="valueText">Portrait (720x1280): 31px</div>
           </div>
         </div>
       </div>
@@ -95,47 +99,44 @@
 
         // get width and height of class fullScreen
         // these measurements determine aspect ratio e, l, or p
-        let screenContainer = document.getElementById("fullScreen");
-        currentWidth = screenContainer.offsetWidth;
-        currentHeight = screenContainer.offsetHeight;
-
-        const aspectRatio = currentWidth / currentHeight;
+        let fullScreenContainer = document.getElementById("fullScreen");
+        currentWidth = fullScreenContainer.offsetWidth;
+        currentHeight = fullScreenContainer.offsetHeight;
+        const fullScreenAspectRatio = currentWidth / currentHeight;
 
         clearClassList();
         const formatText = document.getElementById("format");
-
-        /*
-        // for hs get 22% of height of the area
-        const twentyPercentHeight = stageHeight * 0.22;
-        const pxValue = twentyPercentHeight.toString() + "px";
-        cssRoot.style.setProperty("--providerLogoHeight", pxValue);
-        console.log("stage height = ", stageHeight);
-        console.log(pxValue);
-        //35 for elevator
-        // 35 px height for 158 = 22%
-
-        */
-
         const copyFontSize = copyStyle.getPropertyValue("font-size");
         document.getElementById("copyCurrentValue").innerHTML = copyFontSize;
 
+        let fontMultiplier = 1;
+        let copyValue = 1;
         // set to height of ad area to e, l, or p
-        if (aspectRatio < 1) {
-          screenContainer.classList.add("portrait");
+        if (fullScreenAspectRatio < 1) {
+          fullScreenContainer.classList.add("portrait");
           formatText.innerHTML = "portrait";
-          cssRoot.style.setProperty("--copyFontSize", "2.42vmax");
+          fontMultiplier = 0.1092;
+          copyValue = stageHeight * fontMultiplier;
           cssRoot.style.setProperty("--providerLogoHeightRatio", "1.29");
-        } else if (aspectRatio < 1.422 && aspectRatio >= 1) {
-          screenContainer.classList.add("elevator");
+          console.log(currentHeight * 0.0242);
+        } else if (fullScreenAspectRatio < 1.422 && fullScreenAspectRatio >= 1) {
+          fullScreenContainer.classList.add("elevator");
           formatText.innerHTML = "elevator";
-          cssRoot.style.setProperty("--copyFontSize", "3.44vmax");
+          fontMultiplier = 0.0359;
+          copyValue = stageWidth * fontMultiplier;
           cssRoot.style.setProperty("--providerLogoHeightRatio", "1.59");
+          console.log(currentWidth * 0.0344);
         } else {
-          screenContainer.classList.add("landscape");
+          fullScreenContainer.classList.add("landscape");
           formatText.innerHTML = "landscape";
-          cssRoot.style.setProperty("--copyFontSize", "3.02vmax");
+          fontMultiplier = 0.0323;
+          copyValue = stageWidth * fontMultiplier;
           cssRoot.style.setProperty("--providerLogoHeightRatio", "1.29");
+          console.log(currentWidth * 0.0302);
         }
+
+        const copyValueString = copyValue.toString() + "px";
+        cssRoot.style.setProperty("--copyFontSize", copyValueString);
       }
 
       $(document).ready(function () {
