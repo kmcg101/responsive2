@@ -45,7 +45,7 @@
             <div class="headlineContainer flexContainerRow flexAlignBaseline">
               <img onerror='this.style.display = "none"' class="inlineImageSizeEqualsText marginRightText" src="./breaking.svg" />
 
-              <div id="headline" class="headline lh-500 txt-clr-primary-900 fs-700 ff-bold marginRightText">Many expect 2020</div>
+              <div id="headline" class="headline lh-500 txt-clr-primary-900 fs-700 ff-demibold marginRightText">Many expect 2020</div>
 
               <img onerror='this.style.display = "none"' class="inlineImageSizeEqualsText marginRightText" src="./breaking.svg" />
 
@@ -123,15 +123,18 @@
         if (aspectRatio < 1) {
           screenContainer.classList.add("portrait");
           formatText.innerHTML = "portrait";
-          cssRoot.style.setProperty("--copyFontSize", "2.5vmax");
+          cssRoot.style.setProperty("--copyFontSize", "2.42vmax");
+          cssRoot.style.setProperty("--providerLogoHeightRatio", "1.29");
         } else if (aspectRatio < 1.422 && aspectRatio >= 1) {
           screenContainer.classList.add("elevator");
           formatText.innerHTML = "elevator";
           cssRoot.style.setProperty("--copyFontSize", "3.44vmax");
+          cssRoot.style.setProperty("--providerLogoHeightRatio", "1.59");
         } else {
           screenContainer.classList.add("landscape");
           formatText.innerHTML = "landscape";
-          cssRoot.style.setProperty("--copyFontSize", "3.44vmax");
+          cssRoot.style.setProperty("--copyFontSize", "3.02vmax");
+          cssRoot.style.setProperty("--providerLogoHeightRatio", "1.29");
         }
       }
 

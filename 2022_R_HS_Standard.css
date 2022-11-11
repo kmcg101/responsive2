@@ -49,8 +49,9 @@
   --fs-700: calc(1.1 * var(--copyFontSize));
   /* --fs-700: 5vw; */
 
+  --providerLogoHeightRatio: 1.59;
   /* Provider logo */
-  --providerLogoHeight: calc(1.59 * var(--copyFontSize));
+  --providerLogoHeight: calc(var(--providerLogoHeightRatio) * var(--copyFontSize));
   /* 35px for copy = 22: 159% */
 }
 
