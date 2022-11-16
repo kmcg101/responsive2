@@ -244,7 +244,7 @@ html {
   margin: auto;
   position: relative;
 }
-.elevator .ourCanvas {
+/* .elevator .ourCanvas {
   padding-left: 2.81%;
   padding-right: 1.56%;
   padding-top: 0%;
@@ -261,6 +261,10 @@ html {
   padding-right: 2.78%;
   padding-top: 3.28%;
   padding-bottom: 0%;
+} */
+.labelText {
+  font-weight: 700;
+  font-size: 1rem;
 }
 
 .labelTextContainer {
@@ -351,4 +355,44 @@ html {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.version {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.7rem;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.format {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 1.6rem;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.textContainer {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1rem;
+  position: absolute;
+  top: 100px;
+  left: 20px;
+}
+
+.flexTextContainer {
+  display: flex;
+}
+.copyCurrentValue {
+  margin-left: 1.5rem;
+}
+.topMargin40 {
+  margin-top: 2rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.valueText {
+  margin-top: 0.3rem;
+  margin-left: 1rem;
+  font-size: 1rem;
 }

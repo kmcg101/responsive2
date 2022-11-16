@@ -34,12 +34,19 @@
           <div id="format" class="format"></div>
 
           <div class="labelTextContainer">
-            <div class="labelText">copy size:</div>
-            <div id="copyCurrentValue" class="valueText"></div>
-            <div class="labelText">Copy font size breakpoint values:</div>
-            <div class="valueText">Elevator (640x480): 22px</div>
-            <div class="valueText">Landscape (1024x720): 31px</div>
-            <div class="valueText">Portrait (720x1280): 31px</div>
+            <div class="version">version 352.101.2</div>
+            <div class="textContainer">
+              <div class="flexTextContainer">
+                <div class="labelText">Copy size:</div>
+                <div id="copyCurrentValue" class="copyCurrentValue"></div>
+              </div>
+              <div class="tableContainer">
+                <div class="labelText topMargin40">Copy font size breakpoint values:</div>
+                <div class="valueText">Elevator (640x480): 22px</div>
+                <div class="valueText">Landscape (1024x720): 31px</div>
+                <div class="valueText">Portrait (720x1280): 31px</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -95,6 +102,8 @@
         const stageHeight = currentStage.offsetHeight;
         //const stageArea = stageWidth * stageHeight;
         const stageAreaAspectRatio = stageWidth / stageHeight;
+        console.log("stage width = ", stageWidth);
+        console.log("stage height = ", stageHeight);
 
         const cssRoot = document.querySelector(":root");
 
@@ -104,6 +113,8 @@
         const currentWidth = fullScreenContainer.offsetWidth;
         const currentHeight = fullScreenContainer.offsetHeight;
         const fullScreenAspectRatio = currentWidth / currentHeight;
+        console.log("full width = ", currentWidth);
+        console.log("full height = ", currentHeight);
 
         clearClassList();
         const formatText = document.getElementById("format");
@@ -112,33 +123,36 @@
         let copyValue = 1;
 
         const fullScreenAspectRatioArray = [1.333, 1.422, 1];
-        const stageAreaAspectRatioArray = [4.05, 4.55, 2.21];
+        const stageAreaAspectRatioArray = [4.05, 4.59, 2.21];
         // set to height of ad area to e, l, or p
 
         // this one is for full screen
 
         if (fullScreenAspectRatio < fullScreenAspectRatioArray[2]) {
           fullScreenContainer.classList.add("portrait");
-          formatText.innerHTML = "portrait";
+          formatText.innerHTML = "Portrait";
           //fontMultiplier = 0.1047;
           //copyValue = stageHeight * fontMultiplier;
           //cssRoot.style.setProperty("--providerLogoHeightRatio", "1.29");
           //console.log(currentHeight * 0.0242);
         } else if (fullScreenAspectRatio < fullScreenAspectRatioArray[1] && fullScreenAspectRatio >= fullScreenAspectRatioArray[2]) {
           fullScreenContainer.classList.add("elevator");
-          formatText.innerHTML = "elevator";
+          formatText.innerHTML = "Elevator";
           // fontMultiplier = 0.0359;
           // copyValue = stageWidth * fontMultiplier;
           // cssRoot.style.setProperty("--providerLogoHeightRatio", "1.59");
           // console.log(currentWidth * 0.0344);
         } else {
           fullScreenContainer.classList.add("landscape");
-          formatText.innerHTML = "landscape";
+          formatText.innerHTML = "Landscape";
           // fontMultiplier = 0.0323;
           // copyValue = stageWidth * fontMultiplier;
           // cssRoot.style.setProperty("--providerLogoHeightRatio", "1.29");
           // console.log(currentWidth * 0.0302);
         }
+        //
+        // this is for the content area
+        //
         if (stageAreaAspectRatio < stageAreaAspectRatioArray[2]) {
           //fullScreenContainer.classList.add("portrait");
           //formatText.innerHTML = "portrait";
@@ -151,7 +165,7 @@
         else if (stageAreaAspectRatio < stageAreaAspectRatioArray[1] && stageAreaAspectRatio >= stageAreaAspectRatioArray[2]) {
           //fullScreenContainer.classList.add("elevator");
           //formatText.innerHTML = "elevator";
-          fontMultiplier = 0.0359;
+          fontMultiplier = 0.0343;
           copyValue = stageWidth * fontMultiplier;
           cssRoot.style.setProperty("--providerLogoHeightRatio", "1.59");
         }
@@ -173,7 +187,9 @@
 
       $(document).ready(function () {
         console.log("ready");
-        determineAspectRatioClass();
+        setTimeout(() => {
+          determineAspectRatioClass();
+        }, 70);
 
         addEventListener("resize", (event) => {
           //populateText();
