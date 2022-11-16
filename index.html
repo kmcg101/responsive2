@@ -120,63 +120,37 @@
         const formatText = document.getElementById("format");
 
         let fontMultiplier = 1;
-        let copyValue = 1;
 
         const fullScreenAspectRatioArray = [1.333, 1.422, 1];
         const stageAreaAspectRatioArray = [4.05, 4.59, 2.21];
-        // set to height of ad area to e, l, or p
-
+        //
         // this one is for full screen
-
+        //
         if (fullScreenAspectRatio < fullScreenAspectRatioArray[2]) {
           fullScreenContainer.classList.add("portrait");
           formatText.innerHTML = "Portrait";
-          //fontMultiplier = 0.1047;
-          //copyValue = stageHeight * fontMultiplier;
-          //cssRoot.style.setProperty("--providerLogoHeightRatio", "1.29");
-          //console.log(currentHeight * 0.0242);
         } else if (fullScreenAspectRatio < fullScreenAspectRatioArray[1] && fullScreenAspectRatio >= fullScreenAspectRatioArray[2]) {
           fullScreenContainer.classList.add("elevator");
           formatText.innerHTML = "Elevator";
-          // fontMultiplier = 0.0359;
-          // copyValue = stageWidth * fontMultiplier;
-          // cssRoot.style.setProperty("--providerLogoHeightRatio", "1.59");
-          // console.log(currentWidth * 0.0344);
         } else {
           fullScreenContainer.classList.add("landscape");
           formatText.innerHTML = "Landscape";
-          // fontMultiplier = 0.0323;
-          // copyValue = stageWidth * fontMultiplier;
-          // cssRoot.style.setProperty("--providerLogoHeightRatio", "1.29");
-          // console.log(currentWidth * 0.0302);
         }
         //
-        // this is for the content area
+        // this measures for the content area and changes provider logo size
         //
         if (stageAreaAspectRatio < stageAreaAspectRatioArray[2]) {
-          //fullScreenContainer.classList.add("portrait");
-          //formatText.innerHTML = "portrait";
-          fontMultiplier = 0.1047;
-          copyValue = stageHeight * fontMultiplier;
           cssRoot.style.setProperty("--providerLogoHeightRatio", "1.29");
-        }
-
-        // const stageAreaAspectRatioArray = [4.05, 4.55, 2.21];
-        else if (stageAreaAspectRatio < stageAreaAspectRatioArray[1] && stageAreaAspectRatio >= stageAreaAspectRatioArray[2]) {
-          //fullScreenContainer.classList.add("elevator");
-          //formatText.innerHTML = "elevator";
-          fontMultiplier = 0.0343;
-          copyValue = stageWidth * fontMultiplier;
+        } else if (stageAreaAspectRatio < stageAreaAspectRatioArray[1] && stageAreaAspectRatio >= stageAreaAspectRatioArray[2]) {
           cssRoot.style.setProperty("--providerLogoHeightRatio", "1.59");
-        }
-        //
-        else {
-          //fullScreenContainer.classList.add("landscape");
-          //formatText.innerHTML = "landscape";
-          fontMultiplier = 0.0323;
-          copyValue = stageWidth * fontMultiplier;
+        } else {
           cssRoot.style.setProperty("--providerLogoHeightRatio", "1.29");
         }
+        const maxWidth = 1500;
+        const maxFontSize = 34;
+        const widthPercent = stageWidth / maxWidth;
+        const percentValue = 1 - (1 - widthPercent) * (1 - widthPercent);
+        const copyValue = percentValue * maxFontSize;
 
         const copyValueString = copyValue.toString() + "px";
         cssRoot.style.setProperty("--copyFontSize", copyValueString);
