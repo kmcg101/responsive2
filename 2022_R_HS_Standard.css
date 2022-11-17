@@ -1,14 +1,14 @@
 @font-face {
   font-family: AvenirNext-Regular;
-  src: url(../../_commonAssets/fonts/AvenirNext-Regular-08.ttf);
+  src: url(./AvenirNext-Regular-08.ttf);
 }
 @font-face {
   font-family: AvenirNext-Bold;
-  src: url(../../_commonAssets/fonts/AvenirNext-Bold-01.ttf);
+  src: url(./AvenirNext-Bold-01.ttf);
 }
 @font-face {
   font-family: AvenirNext-Demibold;
-  src: url(../../_commonAssets/fonts/AvenirNext-DemiBold-03.ttf);
+  src: url(./AvenirNext-DemiBold-03.ttf);
 }
 
 :root {
