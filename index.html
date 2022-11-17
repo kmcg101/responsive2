@@ -100,10 +100,8 @@
         const currentStage = document.getElementById("workingArea");
         const stageWidth = currentStage.offsetWidth;
         const stageHeight = currentStage.offsetHeight;
-        //const stageArea = stageWidth * stageHeight;
+        const stageArea = stageWidth * stageHeight;
         const stageAreaAspectRatio = stageWidth / stageHeight;
-        console.log("stage width = ", stageWidth);
-        console.log("stage height = ", stageHeight);
 
         const cssRoot = document.querySelector(":root");
 
@@ -113,8 +111,6 @@
         const currentWidth = fullScreenContainer.offsetWidth;
         const currentHeight = fullScreenContainer.offsetHeight;
         const fullScreenAspectRatio = currentWidth / currentHeight;
-        console.log("full width = ", currentWidth);
-        console.log("full height = ", currentHeight);
 
         clearClassList();
         const formatText = document.getElementById("format");
@@ -151,6 +147,8 @@
         const widthPercent = stageWidth / maxWidth;
         const percentValue = 1 - (1 - widthPercent) * (1 - widthPercent);
         const copyValue = percentValue * maxFontSize;
+        //const copyValue = stageArea / 6500;
+        //console.log("stage area = ", stageArea);
 
         const copyValueString = copyValue.toString() + "px";
         cssRoot.style.setProperty("--copyFontSize", copyValueString);
