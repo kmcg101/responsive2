@@ -34,7 +34,7 @@
           <div id="format" class="format"></div>
 
           <div class="labelTextContainer">
-            <div class="version">version 352.101.2</div>
+            <div class="version">version 352.101.3 (cubic)</div>
             <div class="textContainer">
               <div class="flexTextContainer">
                 <div class="labelText">Copy size:</div>
@@ -145,7 +145,10 @@
         const maxWidth = 1500;
         const maxFontSize = 34;
         const widthPercent = stageWidth / maxWidth;
-        const percentValue = 1 - (1 - widthPercent) * (1 - widthPercent);
+        // cubic
+        const percentValue = 1 - Math.pow(1 - widthPercent, 3);
+        // quadratic
+        //const percentValue = 1 - (1 - widthPercent) * (1 - widthPercent);
         const copyValue = percentValue * maxFontSize;
         //const copyValue = stageArea / 6500;
         //console.log("stage area = ", stageArea);
